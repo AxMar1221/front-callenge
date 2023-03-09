@@ -12,13 +12,18 @@
   gap: 1em;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.btn {
+  background: #ff003a;
+  padding: 10px 10px 10px;
+  color: #ffffff;
+  border-radius: 10px;
   border: none;
-  font-size: 8px;
+  outline: none;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#parent {
+  border-radius: 15px;
 }
