@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import Moveable from 'react-moveable';
 
-const MoveableC = ({ updateMoveable, top, left, width, height, index, color, id, setSelected, isSelected = false, imageBgSize, image }) => {
+const Component = ({ updateMoveable, top, left, width, height, index, color, id, setSelected, isSelected = false, imageBgSize }) => {
   const ref = useRef();
 
   const [nodoReferencia, setNodoReferencia] = useState({
@@ -102,7 +102,7 @@ const MoveableC = ({ updateMoveable, top, left, width, height, index, color, id,
         }}
         onClick={() => setSelected(id)}
       >
-        <img
+        {/* <img
           src={image.url}
           alt={image.title}
           width={width}
@@ -110,7 +110,7 @@ const MoveableC = ({ updateMoveable, top, left, width, height, index, color, id,
           style={{
             objectFit: imageBgSize,
           }}
-        />
+        /> */}
       </div>
 
       <Moveable
@@ -148,4 +148,4 @@ const MoveableC = ({ updateMoveable, top, left, width, height, index, color, id,
   );
 };
 
-export default MoveableC;
+export default Component;

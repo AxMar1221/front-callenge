@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
-import MoveableC from "./components/Moveable";
+import React, { useState } from "react";
+import Component from "./components/Moveable";
+// import MoveableC from "./components/Moveable";
 
-const BGSIZE = ["contain", "cover", "fill", "scale-down", "none"];
-const apiURL = "https://jsonplaceholder.typicode.com/photos?albumId=1";
+// const BGSIZE = ["contain", "cover", "fill", "scale-down", "none"];
+// const apiURL = "https://jsonplaceholder.typicode.com/photos?albumId=1";
 
 const App = () => {
   const [moveableComponents, setMoveableComponents] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch(apiURL)
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      });
-  }, []);
-
-  const addMoveable = () => {
+  const addMoveable = async () => {
     // Create a new moveable component and add it to the array
     const COLORS = ["red", "blue", "yellow", "green", "purple"];
+    let gbImages = []
+    try {
+      const resp = await fetch('https://jsonplaceholder.typicode.com/photos')
+      const data = await resp.json()
+      gbImages = data
+    } catch (error) {
+      console.log(error)
+    }
+    const imageRandom = gbImages[Math.floor(Math.random() * gbImages.length)].url
+    const path = `url(${imageRandom})`
+
     setMoveableComponents([
       ...moveableComponents,
       {
@@ -32,8 +32,8 @@ const App = () => {
         width: 100,
         height: 100,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        updateEnd: true,
-        imageBgSize: BGSIZE[Math.floor(Math.random() * BGSIZE.length)],
+        backgroundImage: path,
+        updateEnd: true
       },
     ]);
   };
@@ -87,13 +87,13 @@ const App = () => {
         }}
       >
         {moveableComponents.map((item, index) => (
-          <MoveableC
+          <Component
             {...item}
             key={index}
             updateMoveable={updateMoveable}
             setSelected={setSelected}
             isSelected={selected === item.id}
-            image={data[index]}
+            // image={data[index]}
           />
         ))}
       </div>
