@@ -1,8 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef, useState } from 'react';
-import Moveable from 'react-moveable';
+import React, { useRef, useState } from "react";
+import Moveable from "react-moveable";
 
-const Component = ({ updateMoveable, top, left, width, height, index, color, id, setSelected, isSelected = false, imageBgSize }) => {
+const Component = ({
+  updateMoveable,
+  top,
+  left,
+  width,
+  height,
+  index,
+  color,
+  id,
+  setSelected,
+  isSelected = false,
+  imageBgSize,
+}) => {
   const ref = useRef();
 
   const [nodoReferencia, setNodoReferencia] = useState({
@@ -16,7 +28,7 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
     imageBgSize,
   });
 
-  let parent = document.getElementById('parent');
+  let parent = document.getElementById("parent");
   let parentBounds = parent?.getBoundingClientRect();
 
   const onResize = async (e) => {
@@ -27,8 +39,10 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
     const positionMaxTop = top + newHeight;
     const positionMaxLeft = left + newWidth;
 
-    if (positionMaxTop > parentBounds?.height) newHeight = parentBounds?.height - top;
-    if (positionMaxLeft > parentBounds?.width) newWidth = parentBounds?.width - left;
+    if (positionMaxTop > parentBounds?.height)
+      newHeight = parentBounds?.height - top;
+    if (positionMaxLeft > parentBounds?.width)
+      newWidth = parentBounds?.width - left;
 
     updateMoveable(id, {
       top,
@@ -66,8 +80,10 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
     const positionMaxTop = top + newHeight;
     const positionMaxLeft = left + newWidth;
 
-    if (positionMaxTop > parentBounds?.height) newHeight = parentBounds?.height - top;
-    if (positionMaxLeft > parentBounds?.width) newWidth = parentBounds?.width - left;
+    if (positionMaxTop > parentBounds?.height)
+      newHeight = parentBounds?.height - top;
+    if (positionMaxLeft > parentBounds?.width)
+      newWidth = parentBounds?.width - left;
 
     const absoluteTop = top;
     const absoluteLeft = left;
@@ -91,9 +107,9 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
       <div
         ref={ref}
         className="draggable"
-        id={'component-' + id}
+        id={"component-" + id}
         style={{
-          position: 'absolute',
+          position: "absolute",
           top: top,
           left: left,
           width: width,
@@ -101,17 +117,7 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
           background: color,
         }}
         onClick={() => setSelected(id)}
-      >
-        {/* <img
-          src={image.url}
-          alt={image.title}
-          width={width}
-          height={height}
-          style={{
-            objectFit: imageBgSize,
-          }}
-        /> */}
-      </div>
+      ></div>
 
       <Moveable
         target={isSelected && ref.current}
@@ -131,7 +137,7 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
         onResizeEnd={onResizeEnd}
         keepRatio={false}
         throttleResize={1}
-        renderDirections={['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se']}
+        renderDirections={["nw", "n", "ne", "w", "e", "sw", "s", "se"]}
         edge={false}
         zoom={1}
         origin={false}
@@ -139,8 +145,12 @@ const Component = ({ updateMoveable, top, left, width, height, index, color, id,
         bounds={{
           left: 0,
           top: 0,
-          right: document.getElementById('parent').getBoundingClientRect().right - document.getElementById('parent').getBoundingClientRect().left,
-          bottom: document.getElementById('parent').getBoundingClientRect().bottom - document.getElementById('parent').getBoundingClientRect().top,
+          right:
+            document.getElementById("parent").getBoundingClientRect().right -
+            document.getElementById("parent").getBoundingClientRect().left,
+          bottom:
+            document.getElementById("parent").getBoundingClientRect().bottom -
+            document.getElementById("parent").getBoundingClientRect().top,
         }}
         snappable
       />

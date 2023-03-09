@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import Component from "./components/Moveable";
-// import MoveableC from "./components/Moveable";
-
-// const BGSIZE = ["contain", "cover", "fill", "scale-down", "none"];
-// const apiURL = "https://jsonplaceholder.typicode.com/photos?albumId=1";
 
 const App = () => {
   const [moveableComponents, setMoveableComponents] = useState([]);
@@ -12,16 +8,17 @@ const App = () => {
   const addMoveable = async () => {
     // Create a new moveable component and add it to the array
     const COLORS = ["red", "blue", "yellow", "green", "purple"];
-    let gbImages = []
+    let gbImages = [];
     try {
-      const resp = await fetch('https://jsonplaceholder.typicode.com/photos')
-      const data = await resp.json()
-      gbImages = data
+      const resp = await fetch("https://jsonplaceholder.typicode.com/photos");
+      const data = await resp.json();
+      gbImages = data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    const imageRandom = gbImages[Math.floor(Math.random() * gbImages.length)].url
-    const path = `url(${imageRandom})`
+    const imageRandom =
+      gbImages[Math.floor(Math.random() * gbImages.length)].url;
+    const path = `url(${imageRandom})`;
 
     setMoveableComponents([
       ...moveableComponents,
@@ -33,7 +30,7 @@ const App = () => {
         height: 100,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
         backgroundImage: path,
-        updateEnd: true
+        updateEnd: true,
       },
     ]);
   };
@@ -69,13 +66,13 @@ const App = () => {
       }}
     >
       <div>
-      <button type="button" onClick={addMoveable} className="btn">
-        Add Moveable
-      </button>
-      {tab}
-      <button type="button" onClick={deleteMoveable} className="btn">
-        Delete Moveable
-      </button>
+        <button type="button" onClick={addMoveable} className="btn">
+          Add Moveable
+        </button>
+        {tab}
+        <button type="button" onClick={deleteMoveable} className="btn">
+          Delete Moveable
+        </button>
       </div>
       <div
         id="parent"
